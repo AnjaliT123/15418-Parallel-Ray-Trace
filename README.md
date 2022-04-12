@@ -57,3 +57,33 @@ It's ideal for us to start by using openMP so we can ease into thinking about ra
 * Week 6: Finish implementing BVH in CUDA, do associated comparisons and complete final reports.  
 
 
+
+# MILESTONE
+
+## Work so Far
+Though we originally started off with using Scotty3D as our starter code, we discovered we did not have permissions to install all the packages needed in the Gates and PSC machines. We spent a couple days trying to remove the dependencies on these packages, but found that we couldn't actually see the render window as a result. To work around this, we decided to use the starter code from [Ray Tracing in One Weekend](https://github.com/RayTracing/raytracing.github.io). 
+
+So far we have implemented ray tracing in openMP that parallelizes over all pixels in the image to determine how to color the pixel. We also have a buggy openMP implementation of building a BVH from the bottom-up. The BVH implementation is based off of [this paper](https://luebke.us/publications/eg09.pdf), which sorts primitives in the scenes based on their location using Morton Codes, and allows us to build the BVH tree from the leaves up. This allows us to parallelize the bounding boxes created at each level, since they are independent of each other and only depend on the nodes below. We're still in the process of debugging this implementation. 
+
+## Progress on Goals and Deliverables
+We're a little behind on our goals/deliverables: ideally we'd have both the parallel ray tracing implementation (with parallelization in detecting BVH collisions) and the BVH implementation in openMP done by now. This makes sense, though, since we lost a few days trying to port our Scotty3D starter code to the Gates machines and we had Carnival in the middle of the last week. 
+
+### New Plan to Achieve 
+* openMP implementation of ray tracing, with parallelization in BVH collision detection 
+* CUDA implementation of ray tracing
+* openMP implementation of BVH
+* Speedup comparisons of openMP, CUDA, and sequential versions of ray tracing and BVH building using new starter code
+
+### Updates to Goals
+*  We still plan to achieve all of the above, with the exception that our CUDA implementation of ray tracing will not include parallelization in BVH collision detection if that requires us to build our BVH in CUDA as well (this was part of our "Nice to Have" section)
+*  We may change the openMP implementation of BVH to a task-queue version if the morton code version continues to be finnicky. This is a reasonable adjustment, since we should still be able to parallelize over all nodes in a given level, but we will be building the tree from the top down. Parent nodes with higher priority will have to wait for their child nodes to complete, though we will likely have more overhead from locking and unlocking the queue to add tasks. 
+
+## Poster Session 
+* For our poster session, we will show speedup graphs comparing the different implementations, as well as the images rendered. We're choosing not to do a demo since we'd just end up waiting for the image to render. 
+
+
+## Issues and Concerns
+* We are a little behind schedule, but we should still be able to complete the openMP implementations of ray tracing and BVH. 
+* We might have some more difficulty with the CUDA implementation of ray tracing, depending on if we need the BVH implementation in CUDA as well. If that's the case, we might not have the CUDA implementation done. 
+
+
