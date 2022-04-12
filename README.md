@@ -81,6 +81,11 @@ We're a little behind on our goals/deliverables: ideally we'd have both the para
 ## Poster Session 
 * For our poster session, we will show speedup graphs comparing the different implementations, as well as the images rendered. We're choosing not to do a demo since we'd just end up waiting for the image to render. 
 
+## Preliminary Results
+We've obtained a speedup graph for the openMP ray trace on the Gates machines. As we can see, for up to 8 threads, we have almost linear speedup, which means our parallelization across pixels works as expected, especially on large images
+
+![alt text](https://github.com/AnjaliT123/15418-Parallel-Ray-Trace/blob/11894671044939235364d0b2da61ea19986f563c/raytrace_pics/Checkpoint%20Ray%20Trace%20Speedups.png)
+
 
 ## Issues and Concerns
 * We are a little behind schedule, but we should still be able to complete the openMP implementations of ray tracing and BVH. 
